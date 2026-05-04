@@ -4,11 +4,12 @@ Core WordPress plugin for [PropertyTaxAppealGuides.com](https://propertytaxappea
 
 ## Subsystems
 
-- **Commerce** — Stripe Checkout, R2 pre-signed URLs, magic-link redownload, order store, refund handling
-- **Mail** — Mailjet SMTP + REST API, transactional templates, contact list sync
-- **Blocks** — Dynamic blocks (county-contacts, municipality-dropdown, conditional-lookup, buy-button)
-- **Schema** — Product JSON-LD for county-guide CPT
-- **Hooks** — auto-assign state taxonomy, MIME type allowlist, etc.
+- **Commerce** — Stripe Checkout, R2 SigV4 pre-signed URLs (10-min TTL), magic-link redownload, custom `wp_pta_orders` table, refund handling
+- **Mail** — Mailjet SMTP override of `wp_mail()`, Mailjet REST `Client` + `Send` (v3.1) + `Contacts` (managecontactslists), branded transactional templates (order confirmation + refund)
+- **Schema** — Product JSON-LD for `county-guide` and `download` post types
+- **Blocks** — Six dynamic blocks: `county-contacts`, `municipality-dropdown`, `conditional-municipality-lookup`, `county-purchase` (EDD; removed Plan E), `related-guide-posts`, `buy-button` (Stripe Checkout)
+- **Hooks** — `upload_mimes` (woff/woff2/ico), 4-week remember-me cookie, login form auto-check, `save_post` auto-assign state taxonomy
+- **Analytics** — GA4 server-side Measurement Protocol on `pta_core_order_paid` (no-op when GA4 constants unset)
 
 ## Requirements
 

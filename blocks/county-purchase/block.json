@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pta-core/county-purchase",
+  "title": "County Purchase (EDD)",
+  "category": "widgets",
+  "icon": "cart",
+  "description": "EDD-driven buy button for county-guide CPT. Plan E removes EDD; pages migrate to pta-core/buy-button.",
+  "attributes": {
+    "text":          { "type": "string",  "default": "Get Guide" },
+    "style":         { "type": "string",  "default": "primary" },
+    "size":          { "type": "string",  "default": "" },
+    "showPrice":     { "type": "boolean", "default": true },
+    "pricePosition": { "type": "string",  "default": "above" },
+    "subtext":       { "type": "string",  "default": "" },
+    "icon":          { "type": "string",  "default": "" },
+    "extraClass":    { "type": "string",  "default": "" }
+  },
+  "supports": { "html": false },
+  "render": "file:./render.php"
+}

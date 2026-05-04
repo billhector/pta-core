@@ -10,5 +10,10 @@ final class Bootstrap
         update_option('pta_core_bootstrap_loaded_at', time());
 
         (new \Pta\Core\Commerce\Module())->register();
+        (new \Pta\Core\Mail\Module())->register();
+        (new \Pta\Core\Schema\Module())->register();
+        (new \Pta\Core\Blocks\Module())->register();
+        (new \Pta\Core\Hooks\Module())->register();
+        (new \Pta\Core\Analytics\Module())->register();
     }
 }

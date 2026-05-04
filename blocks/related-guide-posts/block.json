@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pta-core/related-guide-posts",
+  "title": "Related Guide Posts",
+  "category": "widgets",
+  "icon": "list-view",
+  "description": "Related-posts grid: county-tagged posts on county-guides; tag-based on regular posts.",
+  "attributes": {
+    "limit":       { "type": "number",  "default": 3 },
+    "title":       { "type": "string",  "default": "" },
+    "showExcerpt": { "type": "boolean", "default": true },
+    "showDate":    { "type": "boolean", "default": false }
+  },
+  "supports": { "html": false, "align": ["wide", "full"] },
+  "render": "file:./render.php"
+}

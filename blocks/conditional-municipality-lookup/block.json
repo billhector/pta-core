@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pta-core/conditional-municipality-lookup",
+  "title": "Conditional Municipality Lookup",
+  "category": "widgets",
+  "icon": "search",
+  "description": "Renders the municipality dropdown only if the current county-guide has has_municipality_lookup=true.",
+  "supports": { "html": false, "align": ["wide"] },
+  "render": "file:./render.php"
+}

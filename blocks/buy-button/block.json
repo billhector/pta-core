@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pta-core/buy-button",
+  "title": "Buy Button (Stripe)",
+  "category": "widgets",
+  "icon": "money-alt",
+  "description": "Stripe Checkout button for a given Stripe Price ID. Hits /wp-json/pta/v1/checkout.",
+  "attributes": {
+    "priceId": { "type": "string", "default": "" },
+    "label":   { "type": "string", "default": "Buy now" }
+  },
+  "supports": { "html": false, "align": ["left", "center", "right"] },
+  "render": "file:./render.php"
+}

@@ -2,7 +2,11 @@
 namespace Pta\Core\Commerce\Email;
 
 use Pta\Core\Commerce\MagicLink\Token;
+use Pta\Core\Commerce\OrderStore;
 use Pta\Core\Commerce\R2\Signer;
+use Pta\Core\Mail\Client;
+use Pta\Core\Mail\Send;
+use Pta\Core\Mail\Templates;
 
 defined('ABSPATH') || exit;
 
@@ -16,13 +20,30 @@ final class OrderConfirmation
         $magic_token = Token::mint($order_id, $email);
         $magic_url   = home_url('/redownload?token=' . rawurlencode($magic_token));
 
-        $subject = 'Your property tax appeal guide is ready';
-        $body    = "Thanks for your order!\n\n"
-                 . "One-time download (valid 10 minutes):\n{$one_time_url}\n\n"
-                 . "Re-download anytime here:\n{$magic_url}\n\n"
-                 . "Save this email or bookmark the re-download link — it works as long as your order is active.\n";
-        $headers = ['Content-Type: text/plain; charset=UTF-8'];
+        $order = OrderStore::find_by_id($order_id);
+        $amount_formatted = '$' . number_format(($order['amount_total'] ?? 0) / 100, 2);
 
-        wp_mail($email, $subject, $body, $headers);
+        $vars = [
+            'one_time_url'     => $one_time_url,
+            'magic_url'        => $magic_url,
+            'file_name'        => basename($r2_key),
+            'amount_formatted' => $amount_formatted,
+            'support_email'    => 'reports@propertytaxappealguides.com',
+        ];
+
+        $html = Templates::render('order-confirmation.html', $vars);
+        $text = Templates::render('order-confirmation.txt', $vars);
+
+        try {
+            (new Send(Client::from_constants()))->send_html(
+                $email, '', 'Your property tax appeal guide is ready', $html, $text,
+                ['custom_id' => 'order-' . $order_id]
+            );
+        } catch (\Throwable $e) {
+            error_log('pta-core Send-API fallback to wp_mail: ' . $e->getMessage());
+            wp_mail($email, 'Your property tax appeal guide is ready', $text, [
+                'Content-Type: text/plain; charset=UTF-8',
+            ]);
+        }
     }
 }

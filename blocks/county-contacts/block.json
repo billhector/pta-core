@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pta-core/county-contacts",
+  "title": "County Contacts",
+  "category": "widgets",
+  "icon": "phone",
+  "description": "Assessor + Appeal Board contact info for the current county-guide post.",
+  "supports": { "html": false, "align": ["wide", "full"] },
+  "render": "file:./render.php"
+}
