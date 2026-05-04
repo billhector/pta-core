@@ -27,6 +27,7 @@ add_action('plugins_loaded', static function () {
 
 register_activation_hook(__FILE__, static function () {
     update_option('pta_core_activated_at', time());
+    \Pta\Core\Commerce\OrderStore::install_schema();
     flush_rewrite_rules();
 });
 

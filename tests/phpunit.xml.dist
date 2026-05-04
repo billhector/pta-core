@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="bootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    failOnRisky="true"
+    failOnWarning="true">
+    <testsuites>
+        <testsuite name="unit">
+            <directory>Unit/</directory>
+        </testsuite>
+    </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">../src/</directory>
+        </include>
+    </coverage>
+</phpunit>

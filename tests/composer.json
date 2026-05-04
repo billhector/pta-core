@@ -1,0 +1,18 @@
+{
+  "name": "billhector/pta-core-tests",
+  "description": "Dev-only test harness for pta-core. Not loaded in production.",
+  "type": "project",
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "brain/monkey": "^2.6"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pta\\Core\\": "../src/",
+      "Pta\\Core\\Tests\\": "Unit/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

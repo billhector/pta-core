@@ -8,5 +8,7 @@ final class Bootstrap
     public static function init(): void
     {
         update_option('pta_core_bootstrap_loaded_at', time());
+
+        (new \Pta\Core\Commerce\Module())->register();
     }
 }
