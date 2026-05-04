@@ -3,7 +3,7 @@
  * Plugin Name:       PTA Core
  * Plugin URI:        https://github.com/billhector/pta-core
  * Description:       PropertyTaxAppealGuides.com core: Stripe commerce, R2 delivery, magic-link redownload, Mailjet email, dynamic blocks, schema, and site hooks.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Requires at least: 6.5
  * Requires PHP:      8.2
  * Author:            Bill Hector
@@ -14,7 +14,7 @@
 
 defined('ABSPATH') || exit;
 
-define('PTA_CORE_VERSION', '0.2.0');
+define('PTA_CORE_VERSION', '0.3.0');
 define('PTA_CORE_FILE', __FILE__);
 define('PTA_CORE_DIR', plugin_dir_path(__FILE__));
 define('PTA_CORE_URL', plugin_dir_url(__FILE__));

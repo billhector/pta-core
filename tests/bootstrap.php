@@ -52,3 +52,60 @@ if (!function_exists('update_option')) {
         return true;
     }
 }
+
+// Routes test stubs (used by CountyResolverTest). All read from $GLOBALS-backed fixtures
+// that the test sets up in setUp().
+if (!function_exists('get_term_by')) {
+    function get_term_by(string $field, string $value, string $taxonomy) {
+        foreach ($GLOBALS['_pta_test_terms'] ?? [] as $term) {
+            if ($term['taxonomy'] === $taxonomy && ($term[$field] ?? null) === $value) {
+                return (object) $term;
+            }
+        }
+        return false;
+    }
+}
+if (!function_exists('get_posts')) {
+    function get_posts(array $args): array {
+        $name      = $args['name']      ?? null;
+        $tax_query = $args['tax_query'] ?? null;
+        $term_id   = $tax_query[0]['terms'][0] ?? null;
+
+        $hits = [];
+        foreach ($GLOBALS['_pta_test_posts'] ?? [] as $p) {
+            if ($name !== null && $p['post_name'] !== $name) continue;
+            if ($term_id !== null && !in_array($term_id, $p['state_term_ids'] ?? [], true)) continue;
+            $hits[] = $p['ID'];
+        }
+        return array_slice($hits, 0, $args['posts_per_page'] ?? 10);
+    }
+}
+if (!function_exists('get_the_terms')) {
+    function get_the_terms(int $post_id, string $taxonomy) {
+        foreach ($GLOBALS['_pta_test_posts'] ?? [] as $p) {
+            if ($p['ID'] === $post_id) {
+                $out = [];
+                foreach ($p['state_term_ids'] ?? [] as $tid) {
+                    foreach ($GLOBALS['_pta_test_terms'] ?? [] as $t) {
+                        if ($t['term_id'] === $tid) $out[] = (object) $t;
+                    }
+                }
+                return $out ?: false;
+            }
+        }
+        return false;
+    }
+}
+if (!function_exists('get_post_field')) {
+    function get_post_field(string $field, int $post_id) {
+        foreach ($GLOBALS['_pta_test_posts'] ?? [] as $p) {
+            if ($p['ID'] === $post_id) return $p[$field] ?? '';
+        }
+        return '';
+    }
+}
+if (!function_exists('is_wp_error')) {
+    function is_wp_error($thing): bool {
+        return $thing instanceof \WP_Error;
+    }
+}

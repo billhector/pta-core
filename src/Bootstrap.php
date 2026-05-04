@@ -15,5 +15,6 @@ final class Bootstrap
         (new \Pta\Core\Blocks\Module())->register();
         (new \Pta\Core\Hooks\Module())->register();
         (new \Pta\Core\Analytics\Module())->register();
+        (new \Pta\Core\Routes\Module())->register();
     }
 }

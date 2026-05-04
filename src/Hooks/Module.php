@@ -42,7 +42,9 @@ final class Module
         }
         $state = get_post_meta($post_id, 'state', true);
         if ($state) {
-            wp_set_post_terms($post_id, [$state], 'states');
+            // Taxonomy slug is `state` (singular). Original Fluent snippet wrote `states`
+            // — that bug was ported faithfully in Plan C and is fixed here in Plan D.
+            wp_set_post_terms($post_id, [$state], 'state');
         }
     }
 }
