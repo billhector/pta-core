@@ -10,6 +10,9 @@ final class Module
     public function register(): void
     {
         add_action('pta_core_order_paid', [$this, 'on_order_paid'], 30, 3);
+        add_action('wp_head', static function () {
+            (new Gtag())->emit();
+        }, 1);
     }
 
     public function on_order_paid(int $order_id, string $email, string $r2_key): void
