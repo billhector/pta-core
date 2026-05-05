@@ -61,8 +61,8 @@ final class Module
             $checkout = new \Pta\Core\Commerce\Stripe\Checkout(new \Pta\Core\Commerce\Stripe\Client());
             $session = $checkout->create_session(
                 $req->get_param('price_id'),
-                home_url('/?pta_thank_you=1'),
-                home_url('/?pta_cancelled=1')
+                home_url('/thank-you/?session_id={CHECKOUT_SESSION_ID}'),
+                home_url('/illinois/cook-county/?pta_cancelled=1')
             );
             return new \WP_REST_Response(['checkout_url' => $session['url']], 200);
         } catch (\Throwable $e) {
