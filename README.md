@@ -9,7 +9,8 @@ Core WordPress plugin for [PropertyTaxAppealGuides.com](https://propertytaxappea
 - **Schema** — Product JSON-LD for `county-guide` and `download` post types
 - **Blocks** — Six dynamic blocks: `county-contacts`, `municipality-dropdown`, `conditional-municipality-lookup`, `county-purchase` (EDD; removed Plan E), `related-guide-posts`, `buy-button` (Stripe Checkout)
 - **Hooks** — `upload_mimes` (woff/woff2/ico), 4-week remember-me cookie, login form auto-check, `save_post` auto-assign state taxonomy
-- **Analytics** — GA4 server-side Measurement Protocol on `pta_core_order_paid` (no-op when GA4 constants unset)
+- **Analytics** — GA4 server-side Measurement Protocol on `pta_core_order_paid` (no-op when GA4 constants unset); client-side `gtag.js` loader on `wp_head`
+- **Routes** — `/{state}/{county}/` rewrite + 301 from legacy `/guides/{slug}/` + canonical permalink filter (`post_type_link`)
 
 ## Requirements
 
@@ -25,4 +26,4 @@ No composer. Manual PSR-4 autoload (`autoload.php`) maps `Pta\Core\` → `src/`.
 
 ## Deploy
 
-GitHub Actions → Dreamhost VPS via SSH/rsync. See `.github/workflows/deploy.yml` (added in Plan E).
+GitHub Actions → Dreamhost VPS via SSH `git pull`. See `.github/workflows/deploy.yml`. Push to `main` triggers a deploy in ~10 seconds.
